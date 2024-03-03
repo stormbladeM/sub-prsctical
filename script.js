@@ -1,33 +1,20 @@
 "use strict";
-// document.querySelector(".user-guess").value = 23;
-// console.log(document.querySelector(".user-guess").value);
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
 let highscore = 0;
 let score = 20;
 console.log(randomNumber);
-
-//let comp = (document.querySelector(".computer-guess").textContent =
-//randomNNumber);
 document.querySelector(".check").addEventListener("click", function () {
-  //console.log(document.querySelector(".user-guess").value);
   let guess = Number(document.querySelector(".user-guess").value);
   if (!guess) {
     document.querySelector(".start").textContent = "⛔ Not a valid guess";
-  } else if (guess > randomNumber) {
-    if (score > 0) {
-      document.querySelector(".start").textContent = "⛔ Too high!";
+  } else if (guess !== randomNumber) {
+    if (score >= 1) {
+      document.querySelector(".start").textContent =
+        guess > randomNumber ? "📈 too high!" : "📉 too low!";
       score--;
       document.querySelector(".score").textContent = score;
     } else {
-      document.querySelector(".score").textContent = "💥 you lost the game";
-    }
-  } else if (guess < randomNumber) {
-    if (score > 0) {
-      document.querySelector(".start").textContent = "⛔ Too Low!";
-      score--;
-      document.querySelector(".score").textContent = score;
-    } else {
-      document.querySelector(".score").textContent = "💥 you lost the game";
+      document.querySelector(".start").textContent = "💥 you lost the game";
     }
   } else if (guess === randomNumber) {
     document.querySelector(".start").textContent = "🏆 correct guess";
